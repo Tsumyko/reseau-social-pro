@@ -2,6 +2,31 @@
 
 Application de mise en réseau pour les professionnels locaux (artisans, associations, PME) avec cartographie interactive.
 
+## Contribution au projet
+
+### Important : Gestion des modifications
+
+Toutes les modifications doivent être faites via des push Git :
+
+```bash
+# Cloner le projet
+git clone https://github.com/Tsumyko/reseau-social-pro.git
+
+# Créer une nouvelle branche pour vos modifications
+git checkout -b ma-fonctionnalite
+
+# Faire vos modifications
+
+# Ajouter les fichiers modifiés
+git add .
+
+# Commiter les changements
+git commit -m "Description des modifications"
+
+# Pousser les modifications
+git push origin ma-fonctionnalite
+```
+
 ## État d'avancement du projet
 
 ### ✅ Complété
@@ -104,9 +129,12 @@ src/
 └── App.tsx
 ```
 
-## Prochaines étapes recommandées
+## Prochaines étapes
 
-1. Mettre en place l'authentification
-2. Développer le backend avec Express et MongoDB
-3. Implémenter la gestion des actualités
-4. Ajouter la messagerie entre professionnels
+Nous suivrons cet ordre pour la suite du développement :
+1. Système d'authentification
+2. Backend Express/MongoDB
+3. Gestion des actualités
+4. Messagerie entre professionnels
+
+Chaque modification sera faite via des commits Git pour garder une trace claire de l'évolution du projet.
