@@ -1,26 +1,36 @@
 import api from './api';
 
-export const getPosts = async (category?: string) => {
-  const params = category ? { category } : {};
-  const response = await api.get('/posts', { params });
-  return response.data;
-};
-
-export const createPost = async (data: {
+export interface PostData {
+  title: string;
   content: string;
-  category: 'actualité' | 'offre' | 'événement' | 'autre';
-  images?: string[];
-}) => {
+  category: 'news' | 'event' | 'offer' | 'other';
+  location?: {
+    type: 'Point';
+    coordinates: [number, number];
+  };
+}
+
+export const createPost = async (data: PostData) => {
   const response = await api.post('/posts', data);
   return response.data;
 };
 
-export const likePost = async (postId: string) => {
-  const response = await api.post(`/posts/${postId}/like`);
+export const getPosts = async (params?: {
+  category?: string;
+  lat?: number;
+  lng?: number;
+  radius?: number;
+}) => {
+  const response = await api.get('/posts', { params });
   return response.data;
 };
 
-export const commentPost = async (postId: string, content: string) => {
-  const response = await api.post(`/posts/${postId}/comment`, { content });
+export const updatePost = async (id: string, data: Partial<PostData>) => {
+  const response = await api.put(`/posts/${id}`, data);
+  return response.data;
+};
+
+export const deletePost = async (id: string) => {
+  const response = await api.delete(`/posts/${id}`);
   return response.data;
 };
