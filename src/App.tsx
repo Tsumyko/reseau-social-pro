@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import Feed from './pages/Feed';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import { RootState } from './store';
@@ -22,6 +23,13 @@ export default function App() {
           <PrivateRoute>
             <Layout>
               <Home />
+            </Layout>
+          </PrivateRoute>
+        } />
+        <Route path="/feed" element={
+          <PrivateRoute>
+            <Layout>
+              <Feed />
             </Layout>
           </PrivateRoute>
         } />
