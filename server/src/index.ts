@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
+import postRoutes from './routes/posts';
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/posts', postRoutes);
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/reseau-social-pro')
   .then(() => console.log('Connected to MongoDB'))
