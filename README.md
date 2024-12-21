@@ -48,33 +48,53 @@ git push origin ma-fonctionnalite
    - Filtres de recherche
    - État Redux pour la carte
 
+4. Authentification
+   - Système de connexion/inscription
+   - Gestion JWT
+   - Protection des routes
+   - Store Redux auth
+
+5. Backend
+   - Configuration Express/Node.js
+   - Configuration MongoDB
+   - API REST (auth, posts)
+   - Middleware d'authentification
+
+6. Fonctionnalités sociales
+   - Système d'actualités (posts)
+   - Filtrage géographique des posts
+   - Gestion des catégories
+
 ### 🚧 En cours / À faire
-1. Authentification
-   - [ ] Système de connexion
-   - [ ] Inscription
-   - [ ] Gestion des profils
-   - [ ] Protection des routes
-
-2. Backend
-   - [ ] Configuration Express/Node.js
-   - [ ] Configuration MongoDB
-   - [ ] API REST
-   - [ ] Middleware d'authentification
-
-3. Fonctionnalités sociales
-   - [ ] Système d'actualités
+1. Fonctionnalités sociales
    - [ ] Gestion des profils professionnels
    - [ ] Système de messagerie
    - [ ] Notifications
+   - [ ] Commentaires sur les posts
 
-4. Optimisations
+2. Optimisations
    - [ ] Performance de la carte
    - [ ] Mise en cache
    - [ ] Optimisation des images
    - [ ] SEO
 
-## Comment exécuter le projet
+## Configuration requise
 
+1. Frontend (.env) :
+```env
+VITE_GOOGLE_MAPS_API_KEY=votre_clé_api_google_maps
+```
+
+2. Backend (server/.env) :
+```env
+MONGODB_URI=mongodb://localhost:27017/reseau-social-pro
+JWT_SECRET=votre_secret_jwt
+PORT=5000
+```
+
+## Installation et lancement
+
+1. Frontend :
 ```bash
 # Installation des dépendances
 npm install
@@ -83,58 +103,74 @@ npm install
 npm run dev
 ```
 
-## Configuration requise
+2. Backend :
+```bash
+# Dans le dossier server
+cd server
 
-Créez un fichier `.env` à la racine du projet avec :
-```env
-VITE_GOOGLE_MAPS_API_KEY=votre_clé_api_google_maps
+# Installation des dépendances
+npm install
+
+# Lancement en développement
+npm run dev
 ```
-
-## Points de reprise
-
-Pour continuer le développement :
-
-1. Implémentation de l'authentification
-   - Créer les composants de connexion/inscription
-   - Mettre en place le système d'authentification avec JWT
-   - Protéger les routes
-
-2. Développement du backend
-   - Configuration du serveur Express
-   - Mise en place de la base de données MongoDB
-   - Création des API nécessaires
-
-3. Système d'actualités
-   - Composants de création/édition d'actualités
-   - Flux d'actualités
-   - Filtrage par catégorie
 
 ## Structure des fichiers actuelle
 
 ```
-src/
-├── components/
-│   ├── layout/
-│   │   └── Layout.tsx
-│   └── map/
-│       ├── Map.tsx
-│       └── MapFilters.tsx
-├── pages/
-│   ├── Home.tsx
-│   └── Profile.tsx
-├── store/
-│   ├── index.ts
-│   └── slices/
-│       └── mapSlice.ts
-└── App.tsx
+├── src/
+│   ├── components/
+│   │   ├── layout/
+│   │   │   └── Layout.tsx
+│   │   ├── map/
+│   │   │   ├── Map.tsx
+│   │   │   └── MapFilters.tsx
+│   │   └── posts/
+│   │       └── PostCard.tsx
+│   ├── pages/
+│   │   ├── auth/
+│   │   │   ├── Login.tsx
+│   │   │   └── Signup.tsx
+│   │   ├── Home.tsx
+│   │   ├── Profile.tsx
+│   │   └── Feed.tsx
+│   ├── services/
+│   │   ├── api.ts
+│   │   ├── auth.ts
+│   │   └── posts.ts
+│   ├── store/
+│   │   ├── index.ts
+│   │   └── slices/
+│   │       ├── authSlice.ts
+│   │       └── mapSlice.ts
+│   └── App.tsx
+└── server/
+    ├── src/
+    │   ├── models/
+    │   │   ├── User.ts
+    │   │   └── Post.ts
+    │   ├── routes/
+    │   │   ├── auth.ts
+    │   │   └── posts.ts
+    │   ├── middleware/
+    │   │   └── auth.ts
+    │   └── index.ts
+    └── package.json
 ```
 
 ## Prochaines étapes
 
-Nous suivrons cet ordre pour la suite du développement :
-1. Système d'authentification
-2. Backend Express/MongoDB
-3. Gestion des actualités
-4. Messagerie entre professionnels
+1. Système de messagerie
+   - Chat en temps réel avec Socket.io
+   - Liste des conversations
+   - Notifications
 
-Chaque modification sera faite via des commits Git pour garder une trace claire de l'évolution du projet.
+2. Profils professionnels
+   - Page profil détaillée
+   - Upload d'images
+   - Géolocalisation des entreprises
+
+3. Optimisations
+   - Performance
+   - UX/UI
+   - Tests
