@@ -4,41 +4,37 @@ const postSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
   },
   content: {
     type: String,
-    required: true
+    required: true,
   },
-  images: [{
-    type: String
-  }],
   category: {
     type: String,
     required: true,
-    enum: ['actualité', 'offre', 'événement', 'autre']
+    enum: ['news', 'event', 'offer', 'other'],
   },
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  comments: [{
-    author: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-    },
-    content: {
+  location: {
+    type: {
       type: String,
-      required: true
+      enum: ['Point'],
+      default: 'Point',
     },
-    createdAt: {
-      type: Date,
-      default: Date.now
-    }
-  }]
+    coordinates: {
+      type: [Number],
+      default: [0, 0],
+    },
+  },
+  images: [String],
 }, {
-  timestamps: true
+  timestamps: true,
 });
+
+postSchema.index({ location: '2dsphere' });
 
 export default mongoose.model('Post', postSchema);
