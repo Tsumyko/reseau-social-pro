@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../../store/slices/authSlice';
+import { signup } from '../../services/auth';
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -11,6 +14,7 @@ export default function Signup() {
   });
   
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,8 +27,16 @@ export default function Signup() {
       alert('Les mots de passe ne correspondent pas');
       return;
     }
-    // TODO: Intégrer l'API d'inscription
-    console.log('Signup attempt:', formData);
+
+    try {
+      const { confirmPassword, ...signupData } = formData;
+      const data = await signup(signupData);
+      dispatch(loginSuccess(data));
+      navigate('/');
+    } catch (error: any) {
+      const message = error.response?.data?.message || 'Erreur lors de l\'inscription';
+      alert(message);
+    }
   };
 
   return (
